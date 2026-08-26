@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library Management System V2</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Library Management System</h1>
+      <p>Version 2 — manage books, members, and borrowing history.</p>
+    </header>
+
+    <section class="summary">
+      <div class="card"><span>Total Books</span><strong id="totalBooks">0</strong></div>
+      <div class="card"><span>Available</span><strong id="availableBooks">0</strong></div>
+      <div class="card"><span>Borrowed</span><strong id="borrowedBooks">0</strong></div>
+      <div class="card"><span>Overdue</span><strong id="overdueBooks">0</strong></div>
+    </section>
+
+    <nav class="tabs">
+      <button class="tab active" data-tab="booksTab">Books</button>
+      <button class="tab" data-tab="membersTab">Members</button>
+      <button class="tab" data-tab="historyTab">Borrowing History</button>
+    </nav>
+
+    <section id="booksTab" class="tab-content active">
+      <div class="form-card">
+        <h2 id="bookFormTitle">Add Book</h2>
+        <form id="bookForm">
+          <input id="title" type="text" placeholder="Book title" required>
+          <input id="author" type="text" placeholder="Author" required>
+          <input id="year" type="number" min="0" placeholder="Year">
+          <select id="category">
+            <option>Fiction</option><option>Non-fiction</option><option>Science</option>
+            <option>Technology</option><option>History</option><option>Business</option><option>Other</option>
+          </select>
+          <button id="bookSubmit" type="submit">Add Book</button>
+          <button id="cancelBookEdit" type="button" class="secondary hidden">Cancel</button>
+        </form>
+      </div>
+
+      <section class="list-card">
+        <div class="list-header">
+          <h2>Books</h2>
+          <input id="searchBooks" type="search" placeholder="Search title or author...">
+        </div>
+        <div class="filters">
+          <select id="statusFilter">
+            <option value="all">All Books</option>
+            <option value="available">Available</option>
+            <option value="borrowed">Borrowed</option>
+            <option value="overdue">Overdue</option>
+          </select>
+          <select id="categoryFilter">
+            <option value="all">All Categories</option>
+            <option>Fiction</option><option>Non-fiction</option><option>Science</option>
+            <option>Technology</option><option>History</option><option>Business</option><option>Other</option>
+          </select>
+        </div>
+        <div id="books"></div>
+        <p id="emptyBooks">No books found.</p>
+      </section>
+    </section>
+
+    <section id="membersTab" class="tab-content">
+      <div class="form-card">
+        <h2 id="memberFormTitle">Add Member</h2>
+        <form id="memberForm">
+          <input id="memberName" type="text" placeholder="Member name" required>
+          <input id="memberEmail" type="email" placeholder="Email address" required>
+          <button id="memberSubmit" type="submit">Add Member</button>
+          <button id="cancelMemberEdit" type="button" class="secondary hidden">Cancel</button>
+        </form>
+      </div>
+
+      <section class="list-card">
+        <div class="list-header">
+          <h2>Members</h2>
+          <input id="searchMembers" type="search" placeholder="Search members...">
+        </div>
+        <div id="members"></div>
+        <p id="emptyMembers">No members found.</p>
+      </section>
+    </section>
+
+    <section id="historyTab" class="tab-content">
+      <section class="list-card">
+        <div class="list-header">
+          <h2>Borrowing History</h2>
+          <button id="clearHistory" class="danger">Clear History</button>
+        </div>
+        <div id="history"></div>
+        <p id="emptyHistory">No borrowing history yet.</p>
+      </section>
+    </section>
+  </main>
+
+  <div id="borrowModal" class="modal hidden">
+    <div class="modal-content">
+      <button id="closeModal" class="close">×</button>
+      <h2>Borrow Book</h2>
+      <p id="borrowBookTitle"></p>
+      <form id="borrowForm">
+        <select id="borrowerSelect" required></select>
+        <input id="dueDate" type="date" required>
+        <button type="submit">Confirm Borrow</button>
+      </form>
+      <p id="noMembersMessage" class="warning hidden">Add a member before borrowing a book.</p>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
